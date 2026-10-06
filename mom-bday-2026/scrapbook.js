@@ -61,18 +61,18 @@ function polaroid(ctx, img, box) {
 
 async function photoFace(face) {
   const c=paper(),ctx=c.getContext('2d');
-  const positions=face.photos.length===2 ? [[.33,.23],[.67,.79]] : face.photos.length===3 ? [[.26,.23],[.73,.24],[.49,.79]] : [[.26,.22],[.74,.23],[.26,.79],[.72,.78]];
+  const positions=face.final ? [[.27,.65],[.73,.66]] : face.photos.length===2 ? [[.33,.23],[.67,.79]] : face.photos.length===3 ? [[.26,.23],[.73,.24],[.49,.79]] : [[.26,.22],[.74,.23],[.26,.79],[.72,.78]];
   for(let i=0;i<face.photos.length;i++) {
     const p=face.photos[i],img=await imageBitmap(p),pos=positions[i];
     const box={x:TW*pos[0]+(random()-.5)*28,y:TH*pos[1]+(random()-.5)*40,w:TW*(.415+(random()-.5)*.028),angle:(random()-.5)*.25,photo:p};
     polaroid(ctx,img,box);img.close();face.boxes.push(box);
   }
   if(face.final){
-    lettering(ctx,'Happy 64th birthday, Mom!',575,48,-.018);
-    lettering(ctx,'We’re the lucky three.',643,51,.012);
-    lettering(ctx,'We love you.',710,56,-.012);
-    lettering(ctx,'All our love,',773,38,.016);
-    for(const [name,x,angle] of [['Luke',TW*.25,-.06],['Logan',TW*.50,.025],['Ben',TW*.76,-.025]]){ctx.save();ctx.translate(x,840);ctx.rotate(angle);ctx.font='64px "Permanent Marker"';ctx.fillStyle='#000';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(name,0,0);ctx.restore();}
+    lettering(ctx,'Happy 64th birthday, Mom!',190,48,-.018);
+    lettering(ctx,'We’re the lucky three.',265,51,.012);
+    lettering(ctx,'We love you.',340,56,-.012);
+    lettering(ctx,'All our love,',410,38,.016);
+    for(const [name,x,angle] of [['Luke',TW*.25,-.06],['Logan',TW*.50,.025],['Ben',TW*.76,-.025]]){ctx.save();ctx.translate(x,495);ctx.rotate(angle);ctx.font='64px "Permanent Marker"';ctx.fillStyle='#000';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(name,0,0);ctx.restore();}
   }else{
     ctx.font='56px "Permanent Marker"';const lines=[];let line='';
     for(const word of face.caption.split(' ')){const candidate=line?`${line} ${word}`:word;if(line&&ctx.measureText(candidate).width>TW*.83){lines.push(line);line=word}else line=candidate;}
@@ -278,7 +278,7 @@ function renderFlat() {
   const host=$('flat-album');host.hidden=false;host.classList.toggle('cover',spread<0);host.replaceChildren();
   if(spread<0){const h=document.createElement('h1');h.textContent='The 64th Birthday of Deanne Elaine Weber';const p=document.createElement('p');p.className='cover-signature';p.textContent='Created by Luke, Logan, and Ben';host.append(h,p);return;}
   for(const {face} of visibleFaces()){
-    const section=document.createElement('section');section.className='flat-face';const group=document.createElement('div');group.className='flat-photos';for(const photo of face.photos){const b=document.createElement('button');b.className='flat-photo';b.dataset.photo=String(photo.index);b.setAttribute('aria-label',photo.alt);const img=document.createElement('img');img.src=photo.thumb;img.alt=photo.alt;b.append(img);if(photo.caption){const label=document.createElement('span');label.className='flat-photo-caption';label.textContent=photo.caption;b.append(label);}b.addEventListener('click',()=>openPhoto(photo,b));group.append(b);}const caption=document.createElement('p');caption.textContent=face.final?$('birthday-note').textContent:face.caption;section.append(group,caption);host.append(section);
+    const section=document.createElement('section');section.className=face.final?'flat-face final':'flat-face';const group=document.createElement('div');group.className='flat-photos';for(const photo of face.photos){const b=document.createElement('button');b.className='flat-photo';b.dataset.photo=String(photo.index);b.setAttribute('aria-label',photo.alt);const img=document.createElement('img');img.src=photo.thumb;img.alt=photo.alt;b.append(img);if(photo.caption){const label=document.createElement('span');label.className='flat-photo-caption';label.textContent=photo.caption;b.append(label);}b.addEventListener('click',()=>openPhoto(photo,b));group.append(b);}const caption=document.createElement('p');caption.textContent=face.final?$('birthday-note').textContent:face.caption;section.append(group,caption);host.append(section);
   }
 }
 
