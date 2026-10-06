@@ -13,8 +13,8 @@ GitHub Pages publishes this repository’s `main` branch. The actual hosted path
 `https://lkwbr.com/presents/ben-bday-2025/` and
 `https://lkwbr.com/presents/mom-bday-2026/`.
 
-The short public links are redirects in `lkwbr/lkwbr.github.io`. Ben’s original
-`https://lkwbr.com/bennyboo/` link and Mom’s original Sites link also redirect here.
+The short public links and Ben’s original `https://lkwbr.com/bennyboo/` link are
+redirects in `lkwbr/lkwbr.github.io`. Mom’s original Sites link also redirects here.
 Edit the present in this repository and push to `main`; GitHub Pages publishes it.
 No build or package installation is required.
 
@@ -26,6 +26,7 @@ Run `python3 -m http.server 8427` from the repository root, then open
 
 ## Source history
 
-Ben’s original repository history and Mom’s published source history were imported
-with Git subtrees. Each present keeps its bundled assets beside its code. The
-original repositories remain available for the redirects and historical reference.
+This repository was renamed from `lkwbr/bennyboo`, retaining its settings and
+original commit history. Ben’s card and Mom’s published source history were arranged
+with Git subtrees. Each present keeps its bundled assets beside its code. GitHub
+redirects the old repository address to this repository.
