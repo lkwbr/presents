@@ -9,6 +9,10 @@ Family birthday cards, their artwork, photographs, music, and browser code.
 
 ## Publishing
 
+GitHub is the source of truth and GitHub Pages is the production host for all
+presents. Future changes deploy here. The existing Sites publication stays online
+only as a legacy redirect; do not use Sites to host or publish these cards.
+
 GitHub Pages publishes this repository’s `main` branch. The actual hosted paths are
 `https://lkwbr.com/presents/ben-bday-2025/` and
 `https://lkwbr.com/presents/mom-bday-2026/`.
